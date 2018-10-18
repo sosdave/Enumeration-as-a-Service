@@ -83,11 +83,11 @@ def querytxt():
         for key, value in txtrecords.items():
             if key in rdata.to_text():
                 print("[INFO] \033[33m\"{}\"\033[0;0m Record Found.".format(key))
-                print("    └── \033[32m[HIGH]\033[0;0m {}".format(value))
+                print("    └── \033[32m[+]\033[0;0m {}".format(value))
         # Examine SPF records for the domain
         for spfkey, spfvalue in spfrecords.items():
             if spfkey in rdata.to_text():
-                print("[INFO] \033[33m\"{}\"\033[0;0m SPF Record found.\n    └── \033[32m[HIGH]\033[0;0m {}".format(spfkey,spfvalue))
+                print("[INFO] \033[33m\"{}\"\033[0;0m SPF Record found.\n    └── \033[32m[+]\033[0;0m {}".format(spfkey,spfvalue))
 
 # Function to query and examine CNAME records for the chosen domain
 def querycname():
@@ -103,7 +103,7 @@ def querycname():
                 print("    └── [INFO] CNAME record points to \033[33m{}\033[0;0m".format(rdata.target))
                 for cnamekey, cnamevalue in cnameproviders.items():
                     if cnamekey in rdata.target.to_text():
-                        print("    └── \033[32m[HIGH]\033[0;0m Domain appears to be outsourcing services to \033[33m{}\033[0;0m.".format(cnamevalue))
+                        print("    └── \033[32m[+]\033[0;0m Domain appears to be outsourcing services to \033[33m{}\033[0;0m.".format(cnamevalue))
         except:
             pass
 
@@ -125,7 +125,7 @@ def queryarecords():
                     print("    └── [INFO] IP Address resolves to an ASN owned by \033[33m{}\033[0;0m".format(results['asn_description']))
                     for asnkey, asnvalue in asnproviders.items():
                         if asnkey in format(results['asn_description']):
-                            print("    └── \033[32m[HIGH]\033[0;0m {} Services appear to be provided by \033[33m{}\033[0;0m.".format(value,asnvalue))
+                            print("    └── \033[32m[+]\033[0;0m {} Services appear to be provided by \033[33m{}\033[0;0m.".format(value,asnvalue))
         except:
             pass
 
@@ -140,7 +140,7 @@ def querymxrecords():
             print("[INFO] MX Record : \033[33m{}\033[0;0m".format(rdata.exchange))
             for mxkey, mxvalue in mxrecords.items():
                 if mxkey in rdata.exchange.to_text():
-                    print("    └── \033[32m[HIGH]\033[0;0m : This MX Record indicates a strong probability that the domain is using a {} for hosted email solutions, however it might just be using the MX for mail filtering.".format(mxvalue))
+                    print("    └── \033[32m[+]\033[0;0m : This MX Record indicates a strong probability that the domain is using a {} for hosted email solutions, however it might just be using the MX for mail filtering.".format(mxvalue))
     except:
         pass
 
