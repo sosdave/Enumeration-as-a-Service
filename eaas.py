@@ -77,7 +77,7 @@ def querytxt():
     print("\n")
     print("[*] Querying TXT DNS entries.")
     print("=========================================================")
-    answers = dns.resolver.query(domain,"TXT")
+    answers =  dns.resolver.resolve(domain,"TXT")
     for rdata in answers:
         # Examine various TXT based records for the domain
         for key, value in txtrecords.items():
@@ -97,7 +97,7 @@ def querycname():
     for key, value in cnamerecords.items():
         lookup = key + domain
         try:
-            answers = dns.resolver.query(lookup, 'CNAME')
+            answers =  dns.resolver.resolve(lookup, 'CNAME')
             for rdata in answers:
                 print("[INFO] \033[33m\"{}\"\033[0;0m CNAME record found.".format(key[:-1]))
                 print("    └── [INFO] CNAME record points to \033[33m{}\033[0;0m".format(rdata.target))
@@ -115,7 +115,7 @@ def queryarecords():
     for key, value in cnamerecords.items():
         lookup = key + domain
         try:
-            answers = dns.resolver.query(lookup, 'A')
+            answers =  dns.resolver.resolve(lookup, 'A')
             for rdata in answers:
                 print("[INFO] \033[33m\"{}\"\033[0;0m Record Found resolving to \033[33m{}\033[0;0m.".format(key[:-1],rdata.address))
                 with warnings.catch_warnings():
@@ -135,7 +135,7 @@ def querymxrecords():
     print("[*] Querying MX record DNS entries.")
     print("=========================================================")
     try:
-        answers = dns.resolver.query(domain, 'MX')
+        answers =  dns.resolver.resolve(domain, 'MX')
         for rdata in answers:
             print("[INFO] MX Record : \033[33m{}\033[0;0m".format(rdata.exchange))
             for mxkey, mxvalue in mxrecords.items():
